@@ -12,16 +12,32 @@ struct string_t {
 
 static size_t get_ptr_from_org(const int addr, const size_t len);
 static void expand_capacity_if_needed(string* self, const size_t new_size);
+static string* allocate(void);
 
 #undef INIT_MAX_DATA_SIZE
 #define INIT_MAX_DATA_SIZE 4
 
-string* new_string(void) {
+static string* allocate(void) {
   string* self   = (string*) xmalloc(sizeof(string));
   self->data     = (char*) xmalloc(sizeof(char) * INIT_MAX_DATA_SIZE);
-  memset(self->data, '\0', sizeof(char) * INIT_MAX_DATA_SIZE);
   self->capacity = INIT_MAX_DATA_SIZE;
-  self->size     = 0;
+  self->size     = 1;
+  return self;
+}
+
+string* new_string(void) {
+  string* self = allocate();
+  memset(self->data, '\0', sizeof(char) * INIT_MAX_DATA_SIZE);
+  return self;
+}
+
+string* new_string_from_char(const char* src) {
+  return new_string_from_char_n(src, strlen(src));
+}
+
+string* new_string_from_char_n(const char* src, const size_t len) {
+  string* self = allocate();
+  append_char_n(self, src, len);
   return self;
 }
 
@@ -36,17 +52,17 @@ void delete_string(string* self) {
 void reserve_string(string* self, const size_t new_capacity) {
   self->capacity = new_capacity;
   char* buffer_new = (char*) xmalloc(self->capacity * sizeof(char));
-  strcpy(buffer_new, self->data);
+  strncpy(buffer_new, self->data, self->size);
   xfree(self->data);
   self->data = buffer_new;
 }
 
-void append_string(string* self, string* str) {
-  if (self->size == 0 && str->size == 0) return;
-  const size_t new_str_size = self->size + str->size - 1; // NOTE: remove duplication of '\0'
-  expand_capacity_if_needed(self, new_str_size);
-  strcat(self->data, str->data);
-  self->size = new_str_size;
+void clear_string(string* self) {
+  self->size = 1; // only '\0'
+}
+
+void append_string(string* self, const string* str) {
+  append_char_n(self, str->data, strlen_string(str));
 }
 
 void append_char(string* self, const char* src) {
@@ -57,37 +73,25 @@ void append_char_n(string* self, const char* src, const size_t len) {
   if (len == 0) return;
   const size_t new_str_size = self->size + len;
   expand_capacity_if_needed(self, new_str_size);
-  strncat(self->data, src, len);
-  self->data[new_str_size - 1] = '\0';
+  strncpy(self->data + strlen_string(self), src, len + 1);
   self->size = new_str_size;
+  self->data[self->size - 1] = '\0';
 }
 
 char* string_to_char(string* self) {
   return self->data;
 }
 
-size_t capacity_string(string* self) {
+size_t capacity_string(const string* self) {
   return self->capacity;
 }
 
-size_t size_string(string* self) {
+size_t size_string(const string* self) {
   return self->size;
 }
 
-size_t strlen_string(string* self) {
+size_t strlen_string(const string* self) {
   return self->size - 1;
-}
-
-void char_to_string(string* self, const char* src) {
-  char_to_string_n(self, src, strlen(src));
-}
-
-void char_to_string_n(string* self, const char* src, const size_t len) {
-  const size_t capa_required = len + 1;
-  expand_capacity_if_needed(self, capa_required);
-  strncpy(self->data, src, len);
-  self->data[len] = '\0';
-  self->size = capa_required;
 }
 
 static size_t get_ptr_from_org(const int addr, const size_t len) {
@@ -119,6 +123,6 @@ string* slice_string(string* self, const int beg, const int end) {
   }
 
   string* ret = new_string();
-  char_to_string_n(ret, self->data + beg_from_org, end_from_org - beg_from_org);
+  append_char_n(ret, self->data + beg_from_org, end_from_org - beg_from_org);
   return ret;
 }

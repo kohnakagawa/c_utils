@@ -7,16 +7,18 @@ struct string_t;
 typedef struct string_t string;
 
 string* new_string(void);
+string* new_string_from_char(const char* src);
+string* new_string_from_char_n(const char* src, const size_t len);
 void delete_string(string* self);
 void reserve_string(string* self, const size_t new_capacity);
-void append_string(string* self, string* str);
+void clear_string(string* self);
+void append_string(string* self, const string* str);
 void append_char(string* self, const char* src);
 void append_char_n(string* self, const char* src, const size_t len);
-size_t capacity_string(string* self);
-size_t size_string(string* self);
-size_t strlen_string(string* self);
+size_t capacity_string(const string* self);
+size_t size_string(const string* self);
+size_t strlen_string(const string* self);
 char* string_to_char(string* self);
-void char_to_string(string* self, const char* src);
-void char_to_string_n(string* self, const char* src, const size_t n);
 string* slice_string(string* self, const int beg, const int end);
+
 #endif
