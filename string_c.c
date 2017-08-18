@@ -126,7 +126,5 @@ string* slice_string(string* self, const int beg, const int end) {
     return NULL;
   }
 
-  string* ret = new_string();
-  append_char_n(ret, self->data + beg_from_org, end_from_org - beg_from_org);
-  return ret;
+  return new_string_from_char_n(self->data + beg_from_org, end_from_org - beg_from_org);
 }
