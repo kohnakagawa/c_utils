@@ -9,6 +9,7 @@ typedef struct string_t string;
 string* new_string(void);
 string* new_string_from_char(const char* src);
 string* new_string_from_char_n(const char* src, const size_t len);
+string* new_string_from_string(const string* src);
 void delete_string(string* self);
 void reserve_string(string* self, const size_t new_capacity);
 void clear_string(string* self);

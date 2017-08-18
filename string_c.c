@@ -41,6 +41,10 @@ string* new_string_from_char_n(const char* src, const size_t len) {
   return self;
 }
 
+string* new_string_from_string(const string* src) {
+  return new_string_from_char_n(src->data, strlen_string(src));
+}
+
 void delete_string(string* self) {
   xfree(self->data);
   self->data     = NULL;
@@ -73,7 +77,7 @@ void append_char_n(string* self, const char* src, const size_t len) {
   if (len == 0) return;
   const size_t new_str_size = self->size + len;
   expand_capacity_if_needed(self, new_str_size);
-  strncpy(self->data + strlen_string(self), src, len + 1);
+  strncpy(self->data + strlen_string(self), src, len);
   self->size = new_str_size;
   self->data[self->size - 1] = '\0';
 }

@@ -20,6 +20,13 @@ void test_new_string() {
   string* str0 = new_string_from_char("The Institute");
   string* str1 = new_string_from_char("for solid State Physics");
   printf("%s %s\n", string_to_char(str0), string_to_char(str1));
+  string* str2 = new_string_from_string(str1);
+
+  printf("\"%s\" (expected: \"%s\")\n", string_to_char(str2), string_to_char(str1));
+
+  delete_string(str0);
+  delete_string(str1);
+  delete_string(str2);
 }
 
 void test_append_string() {

@@ -5,7 +5,7 @@ include_directories(../)
 
 set(CMAKE_INCLUDE_PATH )
 set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-std=c99 -g")
+set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-std=c99")
 
 add_executable(vector_test vector_test.c)
 target_link_libraries(vector_test cunit)
