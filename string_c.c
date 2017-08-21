@@ -56,7 +56,11 @@ void delete_string(string* self) {
 void reserve_string(string* self, const size_t new_capacity) {
   self->capacity = new_capacity;
   char* buffer_new = (char*) xmalloc(self->capacity * sizeof(char));
+#if _MSC_VER
+  strncpy_s(buffer_new, self->size, self->data, self->size - 1);
+#else
   strncpy(buffer_new, self->data, self->size);
+#endif
   xfree(self->data);
   self->data = buffer_new;
 }
@@ -77,7 +81,11 @@ void append_char_n(string* self, const char* src, const size_t len) {
   if (len == 0) return;
   const size_t new_str_size = self->size + len;
   expand_capacity_if_needed(self, new_str_size);
+#if _MSC_VER
+  strncpy_s(self->data + strlen_string(self), len + 1, src, len);
+#else
   strncpy(self->data + strlen_string(self), src, len);
+#endif
   self->size = new_str_size;
   self->data[self->size - 1] = '\0';
 }
