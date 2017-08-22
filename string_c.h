@@ -39,6 +39,7 @@ void delete_splitted_strings(vector_ptr_string* vptr_string);
 
 // convert to other types
 char* string_to_char(const string* self);
+string* string_to_string(const string* self);
 #define DECL_STR_TO_DTYPE(Dtype) Dtype CONCAT(string_to_, Dtype)(const string* str)
 DECL_STR_TO_DTYPE(double);
 DECL_STR_TO_DTYPE(float);

@@ -1,4 +1,6 @@
 #include "string_c.h"
+
+#include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -99,6 +101,10 @@ void append_char_n(string* self, const char* src, const size_t len) {
 #endif
   self->size = new_str_size;
   self->data[self->size - 1] = '\0';
+}
+
+string* string_to_string(const string* self) {
+  return new_string_from_string(self);
 }
 
 char* string_to_char(const string* self) {
