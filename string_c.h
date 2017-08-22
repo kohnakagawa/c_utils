@@ -23,8 +23,9 @@ void append_char_n(string* self, const char* src, const size_t len);
 size_t capacity_string(const string* self);
 size_t size_string(const string* self);
 size_t strlen_string(const string* self);
-char* string_to_char(string* self);
+char* string_to_char(const string* self);
 string* slice_string(string* self, const int beg, const int end);
+bool eq_string(const string* str0, const string* str1);
 
 DEFINE_VECTOR_TYPE(ptr_string)
 DECL_VECTOR_METHODS(ptr_string)

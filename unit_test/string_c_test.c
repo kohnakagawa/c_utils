@@ -8,6 +8,7 @@ void test_append_string();
 void test_append_char();
 void test_slice_string();
 void test_split_string();
+void test_eq_string();
 
 int main() {
   test_new_string();
@@ -15,6 +16,7 @@ int main() {
   test_append_string();
   test_append_char();
   test_split_string();
+  test_eq_string();
   return 0;
 }
 
@@ -136,4 +138,28 @@ void test_split_string() {
   delete_string(ptr_str0);
   delete_string(ptr_str1);
   delete_string(ptr_str2);
+}
+
+void test_eq_string() {
+  string* str0 = new_string_from_char("This is");
+  string* str1 = new_string_from_char("This is");
+  string* str2 = new_string_from_char("THIS IS");
+
+  printf("%s == %s: ", string_to_char(str0), string_to_char(str1));
+  if (eq_string(str0, str1)) {
+    printf("True\n");
+  } else {
+    printf("False\n");
+  }
+
+  printf("%s != %s: ", string_to_char(str0), string_to_char(str2));
+  if (!eq_string(str0, str2)) {
+    printf("True\n");
+  } else {
+    printf("False\n");
+  }
+
+  delete_string(str0);
+  delete_string(str1);
+  delete_string(str2);
 }

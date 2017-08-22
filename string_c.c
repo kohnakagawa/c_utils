@@ -1,5 +1,6 @@
 #include "string_c.h"
 #include <string.h>
+#include <stdbool.h>
 
 // NOTE: size <- include '\0'
 //       len  <- do not include '\0'
@@ -9,9 +10,9 @@ struct string_t {
   size_t size;
 };
 
+static string* allocate(void);
 static size_t get_ptr_from_org(const int addr, const size_t len);
 static void expand_capacity_if_needed(string* self, const size_t new_size);
-static string* allocate(void);
 
 #undef INIT_MAX_DATA_SIZE
 #define INIT_MAX_DATA_SIZE 4
@@ -99,7 +100,7 @@ void append_char_n(string* self, const char* src, const size_t len) {
   self->data[self->size - 1] = '\0';
 }
 
-char* string_to_char(string* self) {
+char* string_to_char(const string* self) {
   return self->data;
 }
 
@@ -144,6 +145,13 @@ string* slice_string(string* self, const int beg, const int end) {
   }
 
   return new_string_from_char_n(self->data + beg_from_org, end_from_org - beg_from_org);
+}
+
+bool eq_string(const string* str0,
+               const string* str1) {
+  if (size_string(str0) != size_string(str1)) return false;
+  const size_t len_str = strlen_string(str0);
+  return (strncmp(string_to_char(str0), string_to_char(str1), len_str) == 0);
 }
 
 DEFINE_VECTOR_METHODS(ptr_string)
