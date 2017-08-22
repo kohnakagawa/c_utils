@@ -7,12 +7,14 @@ void test_char_to_string();
 void test_append_string();
 void test_append_char();
 void test_slice_string();
+void test_split_string();
 
 int main() {
   test_new_string();
   test_slice_string();
   test_append_string();
   test_append_char();
+  test_split_string();
   return 0;
 }
 
@@ -95,3 +97,43 @@ void test_slice_string() {
   delete_string(sliced1);
 }
 
+void test_split_string() {
+  string* ptr_str0 = new_string_from_char("This is a pen.");
+  string* ptr_str1 = new_string_from_char("Thisisapen");
+  string* ptr_str2 = new_string_from_char("AIUEO\nKAKIKUKEKO\nSASISUSESO\n");
+
+  printf("%s\n", string_to_char(ptr_str0));
+  printf("%s\n", string_to_char(ptr_str1));
+  printf("%s\n", string_to_char(ptr_str2));
+
+  vector_ptr_string* splitted = split_string(ptr_str0, " ");
+  size_t splitted_num = vector_ptr_string_size(splitted);
+  printf("[");
+  for (size_t i = 0; i < splitted_num; i++) {
+    printf("%s, ", string_to_char(vector_ptr_string_at_nocheck(splitted, i)));
+  }
+  printf("]\n");
+  delete_splitted_strings(splitted);
+
+  splitted = split_string(ptr_str1, " ");
+  splitted_num = vector_ptr_string_size(splitted);
+  printf("[");
+  for (size_t i = 0; i < splitted_num; i++) {
+    printf("%s, ", string_to_char(vector_ptr_string_at_nocheck(splitted, i)));
+  }
+  printf("]\n");
+  delete_splitted_strings(splitted);
+
+  splitted = split_string(ptr_str2, "\n");
+  splitted_num = vector_ptr_string_size(splitted);
+  printf("[");
+  for (size_t i = 0; i < splitted_num; i++) {
+    printf("%s, ", string_to_char(vector_ptr_string_at_nocheck(splitted, i)));
+  }
+  printf("]\n");
+  delete_splitted_strings(splitted);
+
+  delete_string(ptr_str0);
+  delete_string(ptr_str1);
+  delete_string(ptr_str2);
+}

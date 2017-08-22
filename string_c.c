@@ -1,6 +1,5 @@
 #include "string_c.h"
 #include <string.h>
-#include "utils.h"
 
 // NOTE: size <- include '\0'
 //       len  <- do not include '\0'
@@ -63,6 +62,16 @@ void reserve_string(string* self, const size_t new_capacity) {
 #endif
   xfree(self->data);
   self->data = buffer_new;
+}
+
+void resize_string(string* self, const size_t new_size) {
+  resize_noinit_string(self, new_size);
+  memset(self->data, '\0', self->size);
+}
+
+void resize_noinit_string(string* self, const size_t new_size) {
+  reserve_string(self, new_size);
+  self->size = new_size;
 }
 
 void clear_string(string* self) {
@@ -135,4 +144,29 @@ string* slice_string(string* self, const int beg, const int end) {
   }
 
   return new_string_from_char_n(self->data + beg_from_org, end_from_org - beg_from_org);
+}
+
+DEFINE_VECTOR_METHODS(ptr_string)
+
+vector_ptr_string* split_string(const string* self, const char* delimiters) {
+  string* buffer = new_string_from_string(self);
+  vector_ptr_string* vptr_string = vector_ptr_string_new();
+  char* splitted;
+  splitted = strtok(string_to_char(buffer), delimiters);
+  ptr_string splitted_string = new_string_from_char(splitted);
+  vector_ptr_string_push_back(vptr_string, splitted_string);
+  while ((splitted = strtok(NULL, delimiters)) != NULL) {
+    splitted_string = new_string_from_char(splitted);
+    vector_ptr_string_push_back(vptr_string, splitted_string);
+  }
+  delete_string(buffer);
+  return vptr_string;
+}
+
+void delete_splitted_strings(vector_ptr_string* vptr_string) {
+  const size_t size = vector_ptr_string_size(vptr_string);
+  for (size_t i = 0; i < size; i++) {
+    delete_string(vector_ptr_string_at_nocheck(vptr_string, i));
+  }
+  vector_ptr_string_delete(vptr_string);
 }

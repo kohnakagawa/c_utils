@@ -15,3 +15,5 @@ target_link_libraries(stack_test cunit)
 
 add_executable(string_c_test string_c_test.c ../string_c.c)
 # target_link_libraries(string_c_test cunit)
+
+add_executable(file_test file_test.c ../file.c ../string_c.c)
