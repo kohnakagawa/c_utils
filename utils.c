@@ -1,6 +1,6 @@
 #include "utils.h"
 
-void* xmalloc(size_t size) {
+void* xmalloc(const size_t size) {
   void* ptr_ret = malloc(size);
   if (!ptr_ret) {
     perror("xmalloc");

@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void* xmalloc(size_t size);
+void* xmalloc(const size_t size);
 void xfree(void* ptr);
 
 #ifdef DEBUG
