@@ -147,7 +147,7 @@ string* slice_string(string* self, const int beg, const int end) {
     return NULL;
   }
   if (end_from_org >= len) {
-    fprintf(stderr, "%s: at %s %d\n", err_msgs[OUT_OF_RANGE], __FILE__, __LINE__);
+    fprintf(stderr, "%s: at %s %ld\n", err_msgs[OUT_OF_RANGE], __FILE__, __LINE__);
     return NULL;
   }
 
@@ -167,10 +167,19 @@ vector_ptr_string* split_string(const string* self, const char* delimiters) {
   string* buffer = new_string_from_string(self);
   vector_ptr_string* vptr_string = vector_ptr_string_new();
   char* splitted;
+#if _MSC_VER
+  char* cxt;
+  splitted = strtok_s(string_to_char(buffer), delimiters, &cxt);
+#else
   splitted = strtok(string_to_char(buffer), delimiters);
+#endif
   ptr_string splitted_string = new_string_from_char(splitted);
   vector_ptr_string_push_back(vptr_string, splitted_string);
+#if _MSC_VER
+  while ((splitted = strtok_s(NULL, delimiters, &cxt)) != NULL) {
+#else
   while ((splitted = strtok(NULL, delimiters)) != NULL) {
+#endif
     splitted_string = new_string_from_char(splitted);
     vector_ptr_string_push_back(vptr_string, splitted_string);
   }
