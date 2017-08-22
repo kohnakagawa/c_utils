@@ -1,6 +1,7 @@
 #include "string_c.h"
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 // NOTE: size <- include '\0'
 //       len  <- do not include '\0'
@@ -178,3 +179,24 @@ void delete_splitted_strings(vector_ptr_string* vptr_string) {
   }
   vector_ptr_string_delete(vptr_string);
 }
+
+#define DEFINE_STR_TO_DTYPE(Dtype, Converter)                           \
+  DECL_STR_TO_DTYPE(Dtype) {                                            \
+    char *endp = NULL, *endp_expected = NULL;                           \
+    char* ptr_str_data = string_to_char(str);                           \
+    const size_t size_str = size_string(str);                           \
+    endp_expected = ptr_str_data + size_str - 1;                        \
+    const Dtype ret = (Dtype)Converter;                                 \
+    if (endp != endp_expected) {                                        \
+      fprintf(stderr, "Error occurs during %s at %s:%d\n", STR(Converter), __FILE__, __LINE__); \
+      exit(EXIT_FAILURE);                                               \
+    }                                                                   \
+    return ret;                                                         \
+  }
+DEFINE_STR_TO_DTYPE(double, strtod(ptr_str_data, &endp))
+DEFINE_STR_TO_DTYPE(float, strtof(ptr_str_data, &endp))
+DEFINE_STR_TO_DTYPE(int32_t, strtol(ptr_str_data, &endp, 0))
+DEFINE_STR_TO_DTYPE(int, strtol(ptr_str_data, &endp, 0))
+DEFINE_STR_TO_DTYPE(uint32_t, strtoul(ptr_str_data, &endp, 0))
+DEFINE_STR_TO_DTYPE(int64_t, strtoll(ptr_str_data, &endp, 0))
+DEFINE_STR_TO_DTYPE(uint64_t, strtoull(ptr_str_data, &endp, 0))

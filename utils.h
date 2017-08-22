@@ -1,6 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#define STR(x) #x
 #define CONCATNATE(x, y) x ## y
 #define CONCAT(x, y) CONCATNATE(x, y)
 

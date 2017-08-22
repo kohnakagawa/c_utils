@@ -9,6 +9,7 @@ void test_append_char();
 void test_slice_string();
 void test_split_string();
 void test_eq_string();
+void test_string_to_other();
 
 int main() {
   test_new_string();
@@ -17,6 +18,7 @@ int main() {
   test_append_char();
   test_split_string();
   test_eq_string();
+  test_string_to_other();
   return 0;
 }
 
@@ -162,4 +164,25 @@ void test_eq_string() {
   delete_string(str0);
   delete_string(str1);
   delete_string(str2);
+}
+
+void test_string_to_other() {
+  string* str0 = new_string_from_char("10"); // int
+  string* str1 = new_string_from_char("10abc"); // int + char mixed
+  string* str2 = new_string_from_char("4294967297"); // int64
+  string* str3 = new_string_from_char("12.3456"); // float
+  string* str4 = new_string_from_char("12.34567890"); // double
+
+  printf("%d (expected 10)\n", string_to_int32_t(str0));
+  printf("%lld (expected 4294967297)\n", string_to_int64_t(str2));
+  printf("%.4f (expected 12.3456)\n", string_to_float(str3));
+  printf("%.8lf (exptected 12.34567890)\n", string_to_double(str4));
+
+  // const int32_t str1_c = string_to_int32_t(str1); // Error occurs at this line
+
+  delete_string(str0);
+  delete_string(str1);
+  delete_string(str2);
+  delete_string(str3);
+  delete_string(str4);
 }
