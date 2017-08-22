@@ -1,0 +1,14 @@
+#include "utils.h"
+
+void* xmalloc(size_t size) {
+  void* ptr_ret = malloc(size);
+  if (!ptr_ret) {
+    perror("xmalloc");
+    exit(EXIT_FAILURE);
+  }
+  return ptr_ret;
+}
+
+void xfree(void* ptr) {
+  free(ptr);
+}

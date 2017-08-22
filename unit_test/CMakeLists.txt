@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_VERBOSE_MAKEFILE 1)
+# set(CMAKE_VERBOSE_MAKEFILE 1)
 
 include_directories(../)
 
@@ -7,13 +7,13 @@ set(CMAKE_INCLUDE_PATH )
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-std=c99")
 
-add_executable(vector_test vector_test.c)
+add_executable(vector_test vector_test.c ../utils.c ../err_msgs.c)
 target_link_libraries(vector_test cunit)
 
-add_executable(stack_test stack_test.c)
+add_executable(stack_test stack_test.c ../utils.c ../err_msgs.c)
 target_link_libraries(stack_test cunit)
 
-add_executable(string_c_test string_c_test.c ../string_c.c)
+add_executable(string_c_test string_c_test.c ../string_c.c ../utils.c ../err_msgs.c)
 # target_link_libraries(string_c_test cunit)
 
-add_executable(file_test file_test.c ../file.c ../string_c.c)
+add_executable(file_test file_test.c ../file_utils.c ../string_c.c ../utils.c ../err_msgs.c)

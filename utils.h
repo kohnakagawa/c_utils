@@ -7,21 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// helper functions
-static inline void* xmalloc(size_t size) {
-  void* ptr_ret = malloc(size);
-  if (NULL == ptr_ret) {
-    fprintf(stderr, "Cannot allocate resources at %s %d\n", __FILE__, __LINE__);
-    exit(EXIT_FAILURE);
-  }
-  return ptr_ret;
-}
+void* xmalloc(size_t size);
+void xfree(void* ptr);
 
-static inline void xfree(void* ptr) {
-  free(ptr);
-}
-
-// helper macros
 #ifdef DEBUG
 #define DEBUG_PRINT(...)                        \
   do {                                          \
