@@ -105,10 +105,12 @@ void test_split_string() {
   string* ptr_str0 = new_string_from_char("This is a pen.");
   string* ptr_str1 = new_string_from_char("Thisisapen");
   string* ptr_str2 = new_string_from_char("AIUEO\nKAKIKUKEKO\nSASISUSESO\n");
+  string* ptr_str3 = new_string_from_char("/path//tsunekoh//nakagawa/koh");
 
   printf("%s\n", string_to_char(ptr_str0));
   printf("%s\n", string_to_char(ptr_str1));
   printf("%s\n", string_to_char(ptr_str2));
+  printf("%s\n", string_to_char(ptr_str3));
 
   vector_ptr_string* splitted = split_string(ptr_str0, " ");
   size_t splitted_num = vector_ptr_string_size(splitted);
@@ -137,9 +139,18 @@ void test_split_string() {
   printf("]\n");
   delete_splitted_strings(splitted);
 
+  splitted = split_string(ptr_str3, "/");
+  splitted_num = vector_ptr_string_size(splitted);
+  printf("splitted_num = %u\n", splitted_num);
+  for (size_t i = 0; i < splitted_num; i++) {
+    printf("%s, ", string_to_char(vector_ptr_string_at_nocheck(splitted, i)));
+  }
+  delete_splitted_strings(splitted);
+
   delete_string(ptr_str0);
   delete_string(ptr_str1);
   delete_string(ptr_str2);
+  delete_string(ptr_str3);
 }
 
 void test_eq_string() {
