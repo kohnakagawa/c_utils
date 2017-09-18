@@ -148,7 +148,7 @@ string* slice_string(string* self, const int beg, const int end) {
     return NULL;
   }
   if (end_from_org >= len) {
-    fprintf(stderr, "%s: at %s %ld\n", err_msgs[OUT_OF_RANGE], __FILE__, __LINE__);
+    fprintf(stderr, "%s: at %s %d\n", err_msgs[OUT_OF_RANGE], __FILE__, (int32_t)__LINE__);
     return NULL;
   }
 
@@ -204,7 +204,7 @@ void delete_splitted_strings(vector_ptr_string* vptr_string) {
     endp_expected = ptr_str_data + size_str - 1;                        \
     const Dtype ret = (Dtype)Converter;                                 \
     if (endp != endp_expected) {                                        \
-      fprintf(stderr, "Error occurs during %s at %s:%d\n", STR(Converter), __FILE__, __LINE__); \
+      fprintf(stderr, "Error occurs during %s at %s:%d\n", ECLIB_STR(Converter), __FILE__, __LINE__); \
       exit(EXIT_FAILURE);                                               \
     }                                                                   \
     return ret;                                                         \

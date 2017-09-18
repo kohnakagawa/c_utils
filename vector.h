@@ -5,12 +5,12 @@
 #include <string.h>
 #include "utils.h"
 
-#define VECTOR_TYPE(T) CONCAT(vector_, T)
-#define VECTOR_REF(T) CONCAT(vectorref_, T)
-#define VECTOR_REF_CONST(T) CONCAT(vectorrefc_, T)
-#define VECTOR_TYPE_DUMMY(T) CONCAT(vector_t_, T)
+#define VECTOR_TYPE(T) ECLIB_CONCAT(vector_, T)
+#define VECTOR_REF(T) ECLIB_CONCAT(vectorref_, T)
+#define VECTOR_REF_CONST(T) ECLIB_CONCAT(vectorrefc_, T)
+#define VECTOR_TYPE_DUMMY(T) ECLIB_CONCAT(vector_t_, T)
 
-#define VECTOR_METHOD(T, f) CONCAT(CONCAT(VECTOR_TYPE(T), _), f)
+#define VECTOR_METHOD(T, f) ECLIB_CONCAT(ECLIB_CONCAT(VECTOR_TYPE(T), _), f)
 
 #undef INIT_MAX_DATA_SIZE
 #define INIT_MAX_DATA_SIZE 128

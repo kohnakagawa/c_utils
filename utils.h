@@ -1,9 +1,9 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#define STR(x) #x
-#define CONCATNATE(x, y) x ## y
-#define CONCAT(x, y) CONCATNATE(x, y)
+#define ECLIB_STR(x) #x
+#define ECLIB_CONCATENATE(x, y) x ## y
+#define ECLIB_CONCAT(x, y) ECLIB_CONCATENATE(x, y)
 
 #include <stdio.h>
 #include <stdlib.h>

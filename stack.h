@@ -5,11 +5,11 @@
 #include <string.h>
 #include "utils.h"
 
-#define STACK_TYPE(T) CONCAT(stack_, T)
-#define STACK_REF(T) CONCAT(stackref_, T)
-#define STACK_TYPE_DUMMY(T) CONCAT(stack_t_, T)
+#define STACK_TYPE(T) ECLIB_CONCAT(stack_, T)
+#define STACK_REF(T) ECLIB_CONCAT(stackref_, T)
+#define STACK_TYPE_DUMMY(T) ECLIB_CONCAT(stack_t_, T)
 
-#define STACK_METHOD(T, f) CONCAT(CONCAT(STACK_TYPE(T), _), f)
+#define STACK_METHOD(T, f) ECLIB_CONCAT(ECLIB_CONCAT(STACK_TYPE(T), _), f)
 
 #undef INIT_MAX_DATA_SIZE
 #define INIT_MAX_DATA_SIZE 128
