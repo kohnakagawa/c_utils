@@ -29,7 +29,6 @@
     size_t size;                                \
   };
 
-// public members
 #define DECL_VECTOR_NEW(T) VECTOR_REF(T) VECTOR_METHOD(T, new)(void)
 #define DEFINE_VECTOR_NEW(T)                                            \
   DECL_VECTOR_NEW(T) {                                                  \

@@ -24,14 +24,4 @@
     return dst;                                 \
   }
 
-DECL_FILL(int32_t);
-DECL_FILL(uint32_t);
-DECL_FILL(double);
-DECL_FILL(float);
-
-DECL_COPY(int32_t);
-DECL_COPY(uint32_t);
-DECL_COPY(double);
-DECL_COPY(float);
-
 #endif
