@@ -30,9 +30,9 @@
 #define DECL_VEC3_OP_VEC3_NEW(T, OPNAME)                                \
   VEC3_TYPE(T) ECLIB_CONCAT(OP_FUNC_TEMPLATE(vec3, OPNAME, VEC3_TYPE(T)), _new)(const VEC3_TYPE(T)* v0, const VEC3_TYPE(T)* v1)
 #define DECL_VEC3_OP_SCALAR(T, OPNAME)                                  \
-  void OP_FUNC_TEMPLATE(vec3, OPNAME, scalar)(VEC3_TYPE(T)* self, const T v)
+  void OP_FUNC_TEMPLATE(vec3, OPNAME, T)(VEC3_TYPE(T)* self, const T v)
 #define DECL_VEC3_OP_SCALAR_NEW(T, OPNAME)                              \
-  VEC3_TYPE(T) ECLIB_CONCAT(OP_FUNC_TEMPLATE(vec3, OPNAME, scalar), _new)(const VEC3_TYPE(T)* v0, const T v)
+  VEC3_TYPE(T) ECLIB_CONCAT(OP_FUNC_TEMPLATE(vec3, OPNAME, T), _new)(const VEC3_TYPE(T)* v0, const T v)
 
 #define DECL_VEC3_OP_FUNCS(T, OPNAME)           \
   DECL_VEC3_OP_VEC3(T, OPNAME);                 \
@@ -118,7 +118,7 @@
 #define DECL_VEC3_NORMALIZE(T) void VEC3_METHOD(T, normalize)(VEC3_TYPE(T)* self)
 #define DEFINE_VEC3_NORMALIZE(T)                                    \
   DECL_VEC3_NORMALIZE(T) {                                          \
-    OP_FUNC_TEMPLATE(vec3, div, scalar)(self, VEC3_METHOD(T, norm)(self)); \
+    OP_FUNC_TEMPLATE(vec3, div, T)(self, VEC3_METHOD(T, norm)(self)); \
   }
 
 #define DEFINE_VEC3_METHODS(T)                  \
