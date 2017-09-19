@@ -11,6 +11,7 @@ My simple C language library
   * vector (vector.h)
   * string (string_c.c)
   * stack (stack.c)
+  * 3D vector (vector3.h)
 * simple filesystem library (filesystem.c)
 * simple algorithm header library (algorithm.h)
   * fill
