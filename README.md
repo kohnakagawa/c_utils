@@ -1,6 +1,6 @@
 ec_lib ( = enhanced c library)
 =============
-My simple library for C language
+My simple C language library 
 
 ## Requirements
 * C99 compiler
@@ -8,13 +8,13 @@ My simple library for C language
 
 ## Features
 * simple C++ STL like container classes
- - vector (vector.h)
- - string (string_c.c)
- - stack (stack.c)
+  * vector (vector.h)
+  * string (string_c.c)
+  * stack (stack.c)
 * simple filesystem library (filesystem.c)
 * simple algorithm header library (algorithm.h)
- - fill
- - copy
+  * fill
+  * copy
 
 ## How to use
 ### Example of vector
