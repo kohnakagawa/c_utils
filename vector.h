@@ -74,10 +74,10 @@
   }
 
 #define DECL_VECTOR_AT(T) T VECTOR_METHOD(T, at)(VECTOR_REF_CONST(T) self, const size_t idx)
-#define DEFINE_VECTOR_AT(T)                                             \
-  DECL_VECTOR_AT(T) {                                                   \
-    RANGE_CHECK(self, idx);                                             \
-    return self->data[idx];                                             \
+#define DEFINE_VECTOR_AT(T)                     \
+  DECL_VECTOR_AT(T) {                           \
+    ECLIB_RANGE_CHECK(self, idx);               \
+    return self->data[idx];                     \
   }
 
 #define DECL_VECTOR_AT_NOCHECK(T) T VECTOR_METHOD(T, at_nocheck)(VECTOR_REF_CONST(T) self, const size_t idx)
@@ -89,7 +89,7 @@
 #define DECL_VECTOR_ASSIGN(T) void VECTOR_METHOD(T, assign)(VECTOR_REF(T) self, const size_t idx, const T val)
 #define DEFINE_VECTOR_ASSIGN(T)                 \
   DECL_VECTOR_ASSIGN(T) {                       \
-    RANGE_CHECK(self, idx);                     \
+    ECLIB_RANGE_CHECK(self, idx);               \
     self->data[idx] = val;                      \
   }
 

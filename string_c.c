@@ -144,7 +144,7 @@ string* slice_string(string* self, const int beg, const int end) {
   const size_t end_from_org = get_ptr_from_org(end, len);
 
   if (beg_from_org >= end_from_org) {
-    DEBUG_PRINT("Cannot slice at %s:%s", __FILE__, __LINE__);
+    ECLIB_DEBUG_PRINT("Cannot slice at %s:%s", __FILE__, __LINE__);
     return NULL;
   }
   if (end_from_org >= len) {
