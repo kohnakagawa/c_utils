@@ -1,6 +1,6 @@
 #include "string_c.h"
 #include <CUnit/CUnit.h>
-#include <CUnit/Console.h>
+#include <CUnit/Basic.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -181,7 +181,7 @@ int main() {
   CU_add_test(string_suite, "split_string", test_split_string);
   CU_add_test(string_suite, "eq_string", test_eq_string);
   CU_add_test(string_suite, "string_to_other", test_string_to_other);
-  CU_console_run_tests();
+  CU_basic_run_tests();
   CU_cleanup_registry();
-  return 0;
+  return CU_get_error();
 }

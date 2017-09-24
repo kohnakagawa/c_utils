@@ -1,25 +1,44 @@
 #include "filesystem.h"
+#include <CUnit/CUnit.h>
+#include <CUnit/Basic.h>
 
-void readlines_test();
+const char data[][128] = {
+  "Temperature 305",
+  "Pressure 1",
+  "Number 1000",
+  "Viscosity 12"
+};
 
-int main() {
-  readlines_test();
+void write_to_file(const char* fname) {
+  FILE* fp = xfopen(fname, "w");
+  const int num_data = sizeof(data) / sizeof(data[0]);
+  for (int i = 0; i < num_data; i++) {
+    fprintf(fp, "%s\n", data[i]);
+  }
+  xfclose(fp);
 }
 
-void readlines_test() {
-  FILE* fp = xfopen("sample.txt", "r");
+void test_readlinest() {
+  const char* fname = "./sample.txt";
+  write_to_file(fname);
+
+  FILE* fp = xfopen(fname, "r");
   vector_ptr_string* vptr_string = readlines(fp);
   const size_t num_lines = vector_ptr_string_size(vptr_string);
   for (size_t i = 0; i < num_lines; i++) {
-    printf("\"%s\"\n", string_to_char(vector_ptr_string_at_nocheck(vptr_string, i)));
-    vector_ptr_string* words_in_line = split_string(vector_ptr_string_at_nocheck(vptr_string, i), " ");
-    const size_t num_words = vector_ptr_string_size(words_in_line);
-    for (size_t j = 0; j < num_words; j++) {
-      printf("\"%s\" ", string_to_char(vector_ptr_string_at_nocheck(words_in_line, j)));
-    }
-    delete_splitted_strings(words_in_line);
-    printf("\n");
+    CU_ASSERT_STRING_EQUAL(string_to_char(vector_ptr_string_at_nocheck(vptr_string, i)),
+                           data[i]);
   }
   delete_splitted_strings(vptr_string);
   xfclose(fp);
+}
+
+int main() {
+  CU_pSuite fsystem_suite = NULL;
+  CU_initialize_registry();
+  fsystem_suite = CU_add_suite("file_system", NULL, NULL);
+  CU_add_test(fsystem_suite, "readlines", test_readlinest);
+  CU_basic_run_tests();
+  CU_cleanup_registry();
+  return CU_get_error();
 }

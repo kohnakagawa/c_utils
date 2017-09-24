@@ -16,7 +16,8 @@ target_link_libraries(stack_test cunit)
 add_executable(string_c_test string_c_test.c ../string_c.c ../utils.c ../err_msgs.c)
 target_link_libraries(string_c_test cunit)
 
-add_executable(file_test filesystem_test.c ../filesystem.c ../string_c.c ../utils.c ../err_msgs.c)
+add_executable(fsystem_test filesystem_test.c ../filesystem.c ../string_c.c ../utils.c ../err_msgs.c)
+target_link_libraries(fsystem_test cunit)
 
 add_executable(vector3_test vector3_test.c)
 target_link_libraries(vector3_test cunit m)

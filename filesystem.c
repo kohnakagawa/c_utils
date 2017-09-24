@@ -17,6 +17,9 @@ void xfclose(FILE* fp) {
   fclose(fp);
 }
 
+/*
+  NOTE: file should not be open as binary mode.
+ */
 size_t get_file_size(FILE* fp) {
   fseek(fp, 0, SEEK_END);
   const size_t size = ftell(fp);

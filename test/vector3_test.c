@@ -1,6 +1,6 @@
-#include "../vector3.h"
+#include "vector3.h"
 #include <CUnit/CUnit.h>
-#include <CUnit/Console.h>
+#include <CUnit/Basic.h>
 
 DEFINE_VEC3_TYPE(double)
 DECL_VEC3_METHODS(double)
@@ -99,7 +99,7 @@ int main(void) {
   CU_add_test(vector3_suite, "norm", test_vector3_norm);
   CU_add_test(vector3_suite, "normalize", test_vector3_normalize);
 
-  CU_console_run_tests();
+  CU_basic_run_tests();
   CU_cleanup_registry();
-  return 0;
+  return CU_get_error();
 }
