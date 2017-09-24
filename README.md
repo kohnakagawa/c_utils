@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/kohnakagawa/ec_lib.svg?branch=master)](https://travis-ci.org/kohnakagawa/ec_lib)
+[![codecov](https://codecov.io/gh/kohnakagawa/ec_lib/branch/master/graph/badge.svg)](https://codecov.io/gh/kohnakagawa/ec_lib)
+
 ec_lib ( = enhanced c library)
 =============
 My simple C language library 
