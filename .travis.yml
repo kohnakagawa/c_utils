@@ -1,0 +1,26 @@
+language: c
+
+sudo:
+  - required
+
+os:
+  - linux
+
+compiler:
+  - gcc
+
+branches:
+  only:
+    - master
+
+before_install:
+  - sudo apt install libcunit1 libcunit1-dev
+
+install:
+  - cd test
+  - cmake .
+  - make
+  - cd ../
+
+script:
+  - ./ci.sh
