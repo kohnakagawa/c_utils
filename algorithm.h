@@ -22,4 +22,22 @@
     return dst;                                 \
   }
 
+#define DECL_UNIQUE(T, PRED) T* ECLIB_ADD_SUFFIX(unique, T)(T* first, const size_t n)
+#define DEFINE_UNIQUE(T, PRED)                  \
+  DECL_UNIQUE(T, PRED) {                        \
+    if (n == 0) return first;                   \
+                                                \
+    T* result = first;                          \
+    T* last   = first + n;                      \
+    T value = *first++;                         \
+    for (; first != last; ++first) {            \
+      if (!PRED(&value, first)) {               \
+        *result++ = value;                      \
+        value = *first;                         \
+      }                                         \
+    }                                           \
+    *result++ = value;                          \
+    return result;                              \
+  }
+
 #endif
