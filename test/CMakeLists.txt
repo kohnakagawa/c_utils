@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_VERBOSE_MAKEFILE 1)
+# set(CMAKE_VERBOSE_MAKEFILE 1)
 
 include_directories(../)
 
@@ -26,3 +26,6 @@ target_link_libraries(fsystem_test ${LINK_LIBS})
 
 add_executable(vector3_test vector3_test.c)
 target_link_libraries(vector3_test ${LINK_LIBS} m)
+
+add_executable(algorithm_test algorithm_test.c)
+target_link_libraries(algorithm_test ${LINK_LIBS})

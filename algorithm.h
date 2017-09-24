@@ -4,7 +4,7 @@
 #include "utils.h"
 #include <stdint.h>
 
-#define DECL_FILL(T) T* ECLIB_ADD_SUFFIX(fill, T)(T* dst, const double c, const size_t n)
+#define DECL_FILL(T) T* ECLIB_ADD_SUFFIX(fill, T)(T* dst, const T c, const size_t n)
 #define DEFINE_FILL(T)                          \
   DECL_FILL(T) {                                \
     for (size_t i = 0; i < n; i++) {            \
