@@ -21,6 +21,7 @@ target_link_libraries(stack_test ${LINK_LIBS})
 add_executable(string_c_test string_c_test.c ../string_c.c ../utils.c ../err_msgs.c)
 target_link_libraries(string_c_test ${LINK_LIBS})
 
+add_definitions(-D_POSIX_C_SOURCE=200112L)
 add_executable(fsystem_test filesystem_test.c ../filesystem.c ../string_c.c ../utils.c ../err_msgs.c)
 target_link_libraries(fsystem_test ${LINK_LIBS})
 
