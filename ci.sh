@@ -5,3 +5,4 @@
 ./test/string_c_test
 ./test/fsystem_test
 ./test/vector3_test
+./test/algorithm_test
