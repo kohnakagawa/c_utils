@@ -42,7 +42,7 @@ void test_vector(void) {
     vector_double_push_back(ptr_vd, val[i]);
   }
   for (size_t i = 0; i < val_size; i++) {
-    printf("%f\n", vector_double_at(ptr_vd, i));
+    printf("val[%d] = %f, ptr_vd[%d] = %f\n", i, val[i], i, vector_double_at(ptr_vd, i));
   }
 
   vector_double_delete(ptr_vd);
@@ -56,3 +56,6 @@ int main(void) {
 
 ## Acknowledgement
 * [blog post by KMC](http://kmc.hatenablog.jp/entry/2015/12/09/051358) (in Japanese).
+
+## History
+* 2017/Sep/25 first version
