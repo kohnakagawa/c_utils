@@ -19,6 +19,7 @@ My simple C language library
 * simple algorithm header library (algorithm.h)
   * fill
   * copy
+  * unique
 
 ## How to use
 ### Example of vector
