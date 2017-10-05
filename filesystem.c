@@ -1,6 +1,5 @@
 #include "filesystem.h"
-
-#include <stdio.h>
+#include <sys/stat.h>
 
 FILE* xfopen(const char* restrict fname,
              const char* restrict mode) {
@@ -18,13 +17,16 @@ void xfclose(FILE* fp) {
 }
 
 /*
-  NOTE: file should not be open as binary mode.
+  security issue: http://www.jpcert.or.jp/sc-rules/c-fio19-c.html
  */
 size_t get_file_size(FILE* fp) {
-  fseek(fp, 0, SEEK_END);
-  const size_t size = ftell(fp);
-  fseek(fp, 0, SEEK_SET);
-  return size;
+  struct stat stbuf;
+  const int fd = fileno(fp);
+  if (fstat(fd, &stbuf) == -1) {
+    perror("Error occurs at fstat");
+    exit(1);
+  }
+  return stbuf.st_size;
 }
 
 vector_ptr_string* readlines(FILE* fp) {
