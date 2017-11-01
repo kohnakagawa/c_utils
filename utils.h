@@ -5,6 +5,7 @@
 #define ECLIB_CONCATENATE(x, y) x ## y
 #define ECLIB_CONCAT(x, y) ECLIB_CONCATENATE(x, y)
 #define ECLIB_ADD_SUFFIX(func, T) ECLIB_CONCAT(func, ECLIB_CONCAT(_, T))
+#define ECLIB_UNUSED_VAR(var) (void)(var)
 
 #include <stdio.h>
 #include <stdlib.h>
